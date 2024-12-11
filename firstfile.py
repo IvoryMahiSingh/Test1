@@ -1,7 +1,7 @@
 import os
 import sqlite3
 import subprocess
-from flask import Flask, request
+from flask import Flask, request, escape
 
 app = Flask(__name__)
 SECRET_KEY = "my_secret_key"
@@ -30,7 +30,7 @@ def login():
     conn.close()
 
     if user:
-        return f"Welcome, {username}!"
+        return f"Welcome, {escape(username)}!"
     else:
         return "Invalid credentials"
 
