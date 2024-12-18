@@ -49,7 +49,7 @@ def delete_user():
     conn.commit()
     conn.close()
 
-    return f"User {username} deleted."
+    return f"User {escape(username)} deleted."
 
 @app.route('/file_upload', methods=['POST'])
 def file_upload():
