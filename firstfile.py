@@ -54,7 +54,11 @@ def delete_user():
 @app.route('/file_upload', methods=['POST'])
 def file_upload():
     file = request.files['file']
-    file.save(os.path.join('/uploads', file.filename))
+    base_path = '/uploads'
+    fullpath = os.path.normpath(os.path.join(base_path, file.filename))
+    if not fullpath.startswith(base_path):
+        raise Exception("Invalid file path")
+    file.save(fullpath)
 
     return "File uploaded successfully!"
 
